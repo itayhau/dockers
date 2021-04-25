@@ -1,0 +1,16 @@
+version: "3"
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: rabbit2
+    ports: 
+      - 5677:5672
+      - 5688:5673
+      - 15699:15672
+  producer:
+    image: rabitpy
+    depends_on:
+      - rabbit   
+    deploy:
+      mode: replicated
+      replicas: 2
